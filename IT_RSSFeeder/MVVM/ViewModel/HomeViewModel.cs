@@ -39,8 +39,16 @@ namespace IT_RSSFeeder.MVVM.ViewModel
                 var command = new RelayCommand(o => IteratevelyLoadFeed(feed.Link));
                 Tabs.Add(new TabButton(feed.Name, false, command));
             }
-            MainViewModel.ViewChanged += () => _cts?.Cancel(); 
+            MainViewModel.ViewChanged += ViewChanged;
             IteratevelyLoadAllFeeds();
+        }
+        private void ViewChanged(ViewModel oldViewModel, ViewModel newViewModel)
+        {
+            var isOpened = newViewModel is HomeViewModel;
+            if (isOpened)
+                return;
+            _cts?.Cancel();
+            MainViewModel.ViewChanged -= ViewChanged;
         }
         private async void IterativelyUpdateItems(Action updateLogic)
         {

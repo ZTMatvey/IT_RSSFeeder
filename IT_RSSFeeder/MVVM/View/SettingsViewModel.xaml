@@ -5,25 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:IT_RSSFeeder.MVVM.ViewModel"
              xmlns:local="clr-namespace:IT_RSSFeeder.MVVM.View"
+             xmlns:converters="clr-namespace:IT_RSSFeeder.Extensions.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
         <viewModel:SettingsViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <converters:BooleanAndConverter x:Key="booleanAndConverter" />
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height=".1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.RowSpan="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition/>
@@ -47,17 +58,42 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Margin="15" Content="Удалить выбранный элемент" IsEnabled="{Binding SelectedItems.Count, ElementName=feedsListView}" Command="{Binding DeleteFeedCommand}" CommandParameter="{Binding ElementName=feedsListView, Path=SelectedItem}"/>
-                <Button Margin="15" Grid.Row="1" Content="Добавить элемнет" Command="{Binding AddFeedCommand}"/>
+                <Button Margin="5" Content="Удалить выбранный элемент" IsEnabled="{Binding SelectedItems.Count, ElementName=feedsListView}" Command="{Binding DeleteFeedCommand}" CommandParameter="{Binding ElementName=feedsListView, Path=SelectedItem}"/>
+                <Button Margin="5" Grid.Row="1" Content="Добавить элемнет" Command="{Binding AddFeedCommand}"/>
             </Grid>
         </Grid>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Частота обновления ленты (мс)" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
-            <TextBox x:Name="UpdateFrequencyTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
-        </Grid>
+        <TextBlock Grid.Row="2" Text="Частота обновления ленты (мс)" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <TextBox Grid.Row="2" x:Name="UpdateFrequencyTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+        <TextBlock Grid.Row="3" Text="Форматированное отображение" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <CheckBox Grid.Row="3" x:Name="ShowFormattedDescriptionCheckBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+
+        <TextBlock Grid.Row="4" Text="Использовать прокси" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <CheckBox Grid.Row="4" x:Name="UseProxyCheckBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+        <TextBlock Grid.Row="5" Text="IP" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <TextBox Grid.Row="5" IsEnabled="{Binding IsChecked, ElementName=UseProxyCheckBox}" x:Name="ProxyIpTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+        <TextBlock Grid.Row="6" Text="Порт" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <TextBox Grid.Row="6" IsEnabled="{Binding IsChecked, ElementName=UseProxyCheckBox}" x:Name="ProxyPortTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+
+        <TextBlock Grid.Row="7" Text="Требуется аутентификация" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <CheckBox Grid.Row="7" IsEnabled="{Binding IsChecked, ElementName=UseProxyCheckBox}" x:Name="UseAuthenticationCheckBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15"/>
+        <TextBlock Grid.Row="8" Text="Логин" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <TextBox Grid.Row="8" x:Name="UserNameTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15">
+            <TextBox.IsEnabled>
+                <MultiBinding Converter="{StaticResource booleanAndConverter}">
+                    <Binding ElementName="UseAuthenticationCheckBox" Path="IsChecked" />
+                    <Binding ElementName="UseProxyCheckBox" Path="IsChecked"  />
+                </MultiBinding>
+            </TextBox.IsEnabled>
+        </TextBox>
+        <TextBlock Grid.Row="9" Text="Пароль" VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+        <TextBox Grid.Row="9" x:Name="PasswordTextBox" Grid.Column="1" VerticalContentAlignment="Center" Foreground="#544137" Margin="15">
+            <TextBox.IsEnabled>
+                <MultiBinding Converter="{StaticResource booleanAndConverter}">
+                    <Binding ElementName="UseAuthenticationCheckBox" Path="IsChecked" />
+                    <Binding ElementName="UseProxyCheckBox" Path="IsChecked"  />
+                </MultiBinding>
+            </TextBox.IsEnabled>
+        </TextBox>
+
     </Grid>
 </UserControl>

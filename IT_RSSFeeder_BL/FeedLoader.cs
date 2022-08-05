@@ -37,7 +37,7 @@ namespace IT_RSSFeeder_BL
         private IWebProxy GetProxy()
         {
             var proxy = new WebProxy(_proxySettings.IP, _proxySettings.Port);
-            if(_proxySettings.IsAuthorize)
+            if(_proxySettings.UseAuthentication)
             {
                 proxy.Credentials = new NetworkCredential(_proxySettings.UserName, _proxySettings.Password);
                 proxy.UseDefaultCredentials = false;

@@ -75,6 +75,5 @@
         <GridSplitter Margin="0 5 0 5" Background="#544137"  ResizeDirection="Rows" Grid.Row="2" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                       ResizeBehavior="PreviousAndNext" />
-         <!--<WebBrowser Grid.Row="3" x:Name="CurrentFeedDescriptionBrowser"/>-->
     </Grid>
 </UserControl>

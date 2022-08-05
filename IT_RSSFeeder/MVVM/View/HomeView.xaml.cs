@@ -25,6 +25,8 @@ namespace IT_RSSFeeder.MVVM.View
     public partial class HomeView : UserControl
     {
         private Action<object> ShowFeedDescription;
+        private const string BROWSER_CONTROL_NAME = "CurrentFeedDescriptionBrowser";
+        private const string TEXTBLOCK_CONTROL_NAME = "CurrentFeedDescriptionBrowser";
         public HomeView()
         {
             InitializeComponent();
@@ -41,20 +43,40 @@ namespace IT_RSSFeeder.MVVM.View
             }
             else
             {
-
+                CreateTextBlock();
+                ShowFeedDescription = ShowFeedDescriptionInTextBlock;
             }
+        }
+        private void CreateTextBlock()
+        {
+            var textBlock = new TextBlock();
+            textBlock.SetValue(NameProperty, TEXTBLOCK_CONTROL_NAME);
+            textBlock.TextWrapping = TextWrapping.Wrap;
+            Grid.SetRow(textBlock, 3);
+            RegisterName(textBlock.Name, textBlock);
+            MainGrid.Children.Add(textBlock);
+        }
+        private void ShowFeedDescriptionInTextBlock(object sender)
+        {
+            var textBlock = FindName(TEXTBLOCK_CONTROL_NAME) as TextBlock;
+            if (textBlock == null)
+                return;
+            var row = sender as FeedDataGridRow;
+            var description = row.Description;
+            var descriptionWithoutTags = Regex.Replace(description, "<.*?>|&.*?;", string.Empty); 
+            textBlock.Text = descriptionWithoutTags;
         }
         private void CreateBrowser()
         {
             var browser = new WebBrowser();
-            browser.SetValue(NameProperty, "CurrentFeedDescriptionBrowser");
+            browser.SetValue(NameProperty, BROWSER_CONTROL_NAME);
             Grid.SetRow(browser, 3);
             RegisterName(browser.Name, browser);
             MainGrid.Children.Add(browser);
         }
         private void ShowFeedDescriptionInBrowser(object sender)
         {
-            var browser = FindName("CurrentFeedDescriptionBrowser") as WebBrowser;
+            var browser = FindName(BROWSER_CONTROL_NAME) as WebBrowser;
             if (browser == null)
                 return;
             var row = sender as FeedDataGridRow;

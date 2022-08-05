@@ -1,11 +1,12 @@
 ﻿using IT_RSSFeeder.Core;
 using System;
+using System.Windows;
 
 namespace IT_RSSFeeder.MVVM.ViewModel
 {
     internal sealed class MainViewModel: ObservableObject
     {
-        public static event Action ViewChanged;
+        public static event Action<ViewModel, ViewModel> ViewChanged;
         private ViewModel _homeViewModel { get; set; }
         private ViewModel _settingsViewModel { get; set; }
         private ViewModel _startViewModel { get; set; }
@@ -32,19 +33,17 @@ namespace IT_RSSFeeder.MVVM.ViewModel
             HomeViewCommand = new RelayCommand(vm =>
             {
                 _homeViewModel = new HomeViewModel();
-                CurrentView = _homeViewModel;
-                ViewChanged?.Invoke();
+                ChangeView(_homeViewModel);
+                MessageBox.Show(ViewChanged?.GetInvocationList().Length.ToString());
             });
-            SettingsViewCommand = new RelayCommand(vm =>
-            {
-                CurrentView = _settingsViewModel;
-                ViewChanged?.Invoke();
-            });
-            StartViewCommand = new RelayCommand(vm =>
-            {
-                CurrentView = _startViewModel;
-                ViewChanged?.Invoke();
-            });
+            SettingsViewCommand = new RelayCommand(vm => ChangeView(_settingsViewModel));
+            StartViewCommand = new RelayCommand(vm => ChangeView(_startViewModel));
+        }
+        private void ChangeView(ViewModel newView)
+        {
+            var oldView = CurrentView;
+            CurrentView = newView;
+            ViewChanged?.Invoke(oldView, newView);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace IT_RSSFeeder_BL
     {
         public string IP { get; set; } = string.Empty;
         public int Port { get; set; }
+        public bool UseAuthentication { get; set; }
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public bool IsAuthorize { get; set; }
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace IT_RSSFeeder.MVVM.ViewModel
 {
-    internal abstract class ViewModel
+    internal abstract class ViewModel : IDisposable
     {
-
+        public void Dispose()
+        {
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 	<feeds>
 		<habrInteresting>
@@ -21,9 +21,9 @@
 	<proxySettings>
 		<ip>127.0.0.1</ip>
 		<port>8080</port>
-		<isAuthorize>false</isAuthorize>
-		<userName></userName>
-		<password></password>
+		<useAuthentication>false</useAuthentication>
+		<userName>login</userName>
+		<password>password</password>
 	</proxySettings>
 	<updateFrequency>10000</updateFrequency>
 	<useProxy>false</useProxy>
