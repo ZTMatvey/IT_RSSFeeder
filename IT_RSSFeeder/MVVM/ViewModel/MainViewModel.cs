@@ -34,7 +34,6 @@ namespace IT_RSSFeeder.MVVM.ViewModel
             {
                 _homeViewModel = new HomeViewModel();
                 ChangeView(_homeViewModel);
-                MessageBox.Show(ViewChanged?.GetInvocationList().Length.ToString());
             });
             SettingsViewCommand = new RelayCommand(vm => ChangeView(_settingsViewModel));
             StartViewCommand = new RelayCommand(vm => ChangeView(_startViewModel));

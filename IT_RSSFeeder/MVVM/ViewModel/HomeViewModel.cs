@@ -23,7 +23,6 @@ namespace IT_RSSFeeder.MVVM.ViewModel
         public ObservableCollection<TabButton> Tabs { get; private set; }
         private readonly ConfigData _config;
         private readonly FeedLoader _feedLoader;
-        private int some;
         public HomeViewModel()
         {
             _config = Config.GetInstance();
@@ -72,7 +71,7 @@ namespace IT_RSSFeeder.MVVM.ViewModel
                     }
                 });
             }
-            catch (TaskCanceledException ex)
+            catch (TaskCanceledException)
             {}
         }
         private void LoadAllFeeds()

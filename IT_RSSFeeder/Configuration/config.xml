@@ -13,10 +13,10 @@
 			<link>http://blog.cleancoder.com/atom.xml</link>
 			<name>Uncle Bob Martin</name>
 		</uncleBob>
-		<staclOverflow>
+		<stackOverflow>
 			<link>https://stackoverflow.com/feeds</link>
 			<name>Stack Overflow</name>
-		</staclOverflow>
+		</stackOverflow>
 	</feeds>
 	<proxySettings>
 		<ip>127.0.0.1</ip>
