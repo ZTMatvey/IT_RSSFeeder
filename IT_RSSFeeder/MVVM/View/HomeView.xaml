@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="IT_RSSFeeder.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IT_RSSFeeder.MVVM.View"
+             xmlns:viewModel="clr-namespace:IT_RSSFeeder.MVVM.ViewModel"
+             xmlns:controls="clr-namespace:IT_RSSFeeder.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition/>
+            <RowDefinition Height=".05*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Tabs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton GroupName="tabs" Content="{Binding Title, Mode=OneWay}"
+                                 Command="{Binding Select}"
+                                 IsChecked="{Binding IsChecked, Mode=OneWay}"
+                           Style="{StaticResource TabButton}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <controls:FeedDataGrid Grid.Row="1" x:Name="Items" CanUserAddRows="False" CanUserDeleteRows="False"
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Items}">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="controls:FeedDataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="FeedDataGridRow_MouseDoubleClick"/>
+                    <EventSetter Event="MouseDown" Handler="FeedDataGridRow_MouseDown"/>
+                    <Setter Property="Link" Value="{Binding Id}"/>
+                    <Setter Property="Description" Value="{Binding Summary.Text}"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Название"  Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Title.Text}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Дата публиуации"  Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding PublishDate, StringFormat=' {0:dddd, dd MMMM yyyy}'}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </controls:FeedDataGrid>
+        <GridSplitter Margin="0 5 0 5" Background="#544137"  ResizeDirection="Rows" Grid.Row="2" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                      ResizeBehavior="PreviousAndNext" />
+         <!--<WebBrowser Grid.Row="3" x:Name="CurrentFeedDescriptionBrowser"/>-->
+    </Grid>
+</UserControl>

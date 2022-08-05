@@ -1,0 +1,36 @@
+﻿<Window x:Class="IT_RSSFeeder.Windows.AddFeed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IT_RSSFeeder.Windows"
+        mc:Ignorable="d"
+        Height="200" Width="300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        MouseDown="Window_MouseDown">
+
+    <Border Background="#78A19F"
+            BorderBrush="#544137"
+            BorderThickness="2 ">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Название:"
+                       VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+            <TextBlock Grid.Row="1" Text="Ссылка:"
+                       VerticalAlignment="Center" Foreground="#544137" FontWeight="Medium" Margin="0 0 5 0"/>
+            <TextBox VerticalContentAlignment="Center" Grid.Column="1" Margin="15" Foreground="#544137" Name="NameTextBox"/>
+            <TextBox VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Foreground="#544137" Margin="15" Name="LinkTextBox"/>
+            <Button Content="Ок" Foreground="#544137" FontWeight="Medium" Grid.Row="2" Grid.ColumnSpan="2" Margin="15" Click="Button_Click"/>
+        </Grid>
+    </Border>
+</Window>

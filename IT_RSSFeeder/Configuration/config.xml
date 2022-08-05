@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<feeds>
+		<habrInteresting>
+			<link>https://habr.com/rss/interesting/</link>
+			<name>Habr</name>
+		</habrInteresting>
+		<news>
+			<link>https://news.ru/rss/category/post/world/</link>
+			<name>News</name>
+		</news>
+		<uncleBob>
+			<link>http://blog.cleancoder.com/atom.xml</link>
+			<name>Uncle Bob Martin</name>
+		</uncleBob>
+		<staclOverflow>
+			<link>https://stackoverflow.com/feeds</link>
+			<name>Stack Overflow</name>
+		</staclOverflow>
+	</feeds>
+	<proxySettings>
+		<ip>127.0.0.1</ip>
+		<port>8080</port>
+		<isAuthorize>false</isAuthorize>
+		<userName></userName>
+		<password></password>
+	</proxySettings>
+	<updateFrequency>10000</updateFrequency>
+	<useProxy>false</useProxy>
+	<showDescriptionWithTagFormatting>true</showDescriptionWithTagFormatting>
+</configuration>

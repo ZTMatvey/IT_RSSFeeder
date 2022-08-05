@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="IT_RSSFeeder.MVVM.View.StartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IT_RSSFeeder.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32"
+                   Text="Добро пожаловать!"
+                   Foreground="#544137"
+                   FontWeight="Bold"/>
+        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16"
+                   Text="Двойной клик лкм- для октрытия статьи в браузере"
+                   Foreground="#544137"
+                   FontWeight="Bold"/>
+        <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16"
+                   Text="Один клик пкм- для октрытия описания"
+                   Foreground="#544137"
+                   FontWeight="Bold"/>
+    </Grid>
+</UserControl>
